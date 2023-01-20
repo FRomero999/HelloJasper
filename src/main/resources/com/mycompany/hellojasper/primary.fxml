@@ -12,7 +12,7 @@
          <font>
             <Font name="System Bold" size="29.0" />
          </font></Label>
-      <Button fx:id="primaryButton" onAction="#verInforme" text="Mostrar Informe" />
+      <Button fx:id="primaryButton" onAction="#verInforme" text="Mostrar y descargar Informe" />
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
