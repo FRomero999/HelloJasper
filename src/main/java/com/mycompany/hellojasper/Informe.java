@@ -23,55 +23,54 @@ import net.sf.jasperreports.swing.JRViewer;
  * @author FranciscoRomeroGuill
  */
 public class Informe {
- 
-    public static void showReport() throws JRException, ClassNotFoundException, SQLException {
- 
-        //String fileName = "/home/paco/JaspersoftWorkspace/MyReports/listado.jrxml";
+
+    public static void showReport(String tipo) throws JRException, ClassNotFoundException, SQLException {
+
         HashMap hm = new HashMap();
-        
-        // descarga dentro del mismo proyecto
-        //hm.put("TITLE", "Informe "+new java.util.Date().toString());
 
-        String report = "informe.jasper";
-        //JasperReport report = JasperCompileManager.compileReport(fileName);
+        hm.put("tipo", tipo);
 
-        
-        JasperPrint jasperPrint = JasperFillManager.fillReport(report, hm, JdbcUtil.getConnection());
-        
-        //JasperPrint jasperPrint = JasperFillManager.fillReport(fileName, hm, Conexion.conectar());
-        
+        String report = "Pokemon.jasper";
+
+        JasperPrint jasperPrint = JasperFillManager.fillReport(
+                report, 
+                hm, 
+                JdbcUtil.getConnection()
+        );
+
         JRViewer viewer = new JRViewer(jasperPrint);
- 
-        JFrame frame = new JFrame("Report");
+
+        JFrame frame = new JFrame("Listado de Pokemons");
         frame.getContentPane().add(viewer);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.pack();
-        frame.setVisible(true);        
+        frame.setVisible(true);
 
         System.out.print("Done!");
-    }    
-    
-    public static void pdfReport() throws JRException, ClassNotFoundException, SQLException {
- 
-        //String fileName = "/home/paco/JaspersoftWorkspace/MyReports/listado.jrxml";
-        HashMap hm = new HashMap();
-        
-        // descarga dentro del mismo proyecto
-        //hm.put("TITLE", "Informe "+new java.util.Date().toString());
-       
-        String report = "informe.jasper";
-        //JasperReport report = JasperCompileManager.compileReport(fileName);
+    }
 
-        JasperPrint jasperPrint = JasperFillManager.fillReport(report, hm, JdbcUtil.getConnection());
+    public static void pdfReport(String tipo) throws JRException, ClassNotFoundException, SQLException {
+
+        HashMap hm = new HashMap();
+
+        hm.put("tipo", tipo);
+
+        String report = "Pokemon.jasper";
+
+        JasperPrint jasperPrint = JasperFillManager.fillReport(
+                report, 
+                hm, 
+                JdbcUtil.getConnection()
+        );
         
         JRPdfExporter exp = new JRPdfExporter();
         exp.setExporterInput(new SimpleExporterInput(jasperPrint));
-        exp.setExporterOutput(new SimpleOutputStreamExporterOutput("informe.pdf"));
+        exp.setExporterOutput(new SimpleOutputStreamExporterOutput("pokeball.pdf"));
         SimplePdfExporterConfiguration conf = new SimplePdfExporterConfiguration();
         exp.setConfiguration(conf);
-        exp.exportReport();      
+        exp.exportReport();
 
-        System.out.print("Done!");       
-    }  
-    
+        System.out.print("Done!");
+    }
+
 }
